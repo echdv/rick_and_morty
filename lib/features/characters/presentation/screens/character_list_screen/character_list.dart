@@ -117,27 +117,22 @@ class _CharacterListState extends State<CharacterList> {
                   ),
                 ),
                 BlocBuilder<CharacterBloc, CharacterState>(
+                  bloc: bloc,
                   builder: (context, state) {
-                    return BlocConsumer<CharacterBloc, CharacterState>(
-                      bloc: bloc,
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        if (state is CharacterLoadingState) {
-                          return Container(
-                            height: 20.h,
-                            width: 40.w,
-                            color: ThemeHelper.primaryGrey3,
-                          );
-                        }
+                    if (state is CharacterLoadingState) {
+                      return Container(
+                        height: 20.h,
+                        width: 40.w,
+                        color: ThemeHelper.primaryGrey3,
+                      );
+                    }
 
-                        if (state is CharacterLoadedState) {
-                          return Text(
-                            state.characterModel.info!.count.toString(),
-                          );
-                        }
-                        return const Text('загружается');
-                      },
-                    );
+                    if (state is CharacterLoadedState) {
+                      return Text(
+                        state.characterModel.info!.count.toString(),
+                      );
+                    }
+                    return const Text('загружается');
                   },
                 ),
                 const Spacer(),
